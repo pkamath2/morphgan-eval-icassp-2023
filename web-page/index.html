@@ -79,6 +79,14 @@
             border: solid black 1px;
         }
     </style>
+
+    <script>
+        function scrollToTheTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <title>Towards Controllable Audio Texture Morphing</title>
 </head>
 
 <body>
@@ -97,1053 +105,1428 @@
         <div class='row'>
             <div class='col-2'>&nbsp;</div>
             <div class='col-8'><i>This webpage is best viewed either on Chrome or Firefox with at least 1200px
-                    resolution.For smaller screens please use Firefox only. </i></a></div>
+                    resolution.For smaller screens please use Firefox only. </i></div>
             <div class='col-2'>&nbsp;</div>
         </div>
         <div class='row'>&nbsp;</div>
         <div class='row'>&nbsp;</div>
         <div class='row'>
             <div class='col-2'>&nbsp;</div>
-            <div class='col-8'>This is a companion webpage for the paper submitted at ICASSP 2023- <a href='#'>'Towards
-                    Controllable Audio Texture Morphing'</a></div>
+            <div class='col-8'>This is a companion webpage for the paper submitted at ICASSP 2023 titled 'Towards
+                    Controllable Audio Texture Morphing'</div>
             <div class='col-2'>&nbsp;</div>
         </div>
         <div class='row text-wrap'>&nbsp;</div>
-        <!--Morphgan-->
-        <div class='row text-wrap'>&nbsp;</div>
-        <div class='row text-wrap'>
-            <div class='col-12 text-center'>
-                <h4><b>Inter-Class Morphing Samples - Morph GAN</b></h4>
+
+
+        <div class='row'>
+            <div class='col-2'>&nbsp;</div>
+            <div class='col-8'>The code for this paper can be found at :
+                <ul>
+                    <li>Code for MorphGAN: <a href="https://github.com/lonce/sonyGanFork/tree/floatingconditionFork">https://github.com/lonce/sonyGanFork/tree/floatingconditionFork</a></li>
+                    <li>Code for classifier (used to generate class parameters): <a href="https://github.com/chitralekha18/audio-classification">https://github.com/chitralekha18/audio-classification</a></li>
+                    <li>Code for evaluating the samples: <a href="https://github.com/pkamath2/morphgan-eval-icassp-2023">https://github.com/pkamath2/morphgan-eval-icassp-2023</a></li>
+                </ul>
+
+            </div>
+            <div class='col-2'>&nbsp;</div>
+        </div>
+        
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-2">
+                &nbsp;
+            </div>
+            <div class="col-8">
+                <b>Content Index: </b><br />
+                <ol>
+                    <li><a href="#audio-quality">Audio Quality (Section 5.1 in paper)</a></li>
+                    <li><a href="#inter-class-morphing">Inter-Class Morphing (Section 5.2 in the paper)</a></li>
+                    <li><a href="#intra-class-morphing">Intra-Class Morphing (Section 5.3 in the paper)</a></li>
+                    <li><a href="#interpretability">Exploring Interpretability of Inter-Class conditional parameters
+                            (Section 5.4 in the paper)</a></li>
+                    <li><a href="#param-consistency">Consistency across conditional parameters (Section 5.5 in the
+                            paper)</a></li>
+                </ol>
+            </div>
+            <div class="col-2">
+                &nbsp;
             </div>
         </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 1 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/0.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/1.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/2.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/3.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/4.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/5.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/6.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/7.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/8.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/9.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-51/10.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-51/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 2 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/0.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/1.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/2.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/3.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/4.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/5.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/6.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/7.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/8.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/9.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-56/10.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-56/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 3 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/0.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/1.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/2.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/3.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/4.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/5.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/6.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/7.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/8.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/9.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan/2022-10-17-22-50/10.png' /><br /> <audio controls>
-                    <source src='resources/morphgan/2022-10-17-22-50/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <!--Morphgan complete-->
-        <hl />
-        <!--One Hot-->
-        <div class='row text-wrap'>&nbsp;</div>
-        <div class='row text-wrap'>
-            <div class='col-12 text-center'>
-                <h4><b>Inter-Class Morphing Samples - One Hot GAN</b></h4>
+
+        <div class='row'>
+            <div class='col-1'>
+                &nbsp;
+            </div>
+            <div class='col-10 table-center-align dashed-boder'>
+            </div>
+            <div class='col-1'>
+                &nbsp;
             </div>
         </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 1 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/0.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/1.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/2.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/3.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/4.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/5.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/6.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/7.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/8.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/9.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-15/10.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-15/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 2 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/0.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/1.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/2.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/3.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/4.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/5.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/6.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/7.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/8.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/9.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-13/10.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-13/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 3 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/0.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/1.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/2.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/3.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/4.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/5.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/6.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/7.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/8.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/9.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot/2022-09-02-15-14/10.png' /><br /> <audio controls>
-                    <source src='resources/onehot/2022-09-02-15-14/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <!--One Hot complete-->
-        <hl />
-        <!--Mix-->
+
         <div class='row text-wrap'>&nbsp;</div>
-        <div class='row text-wrap'>
-            <div class='col-12 text-center'>
-                <h4><b>Inter-Class Morphing Samples - Mix</b></h4>
+
+
+
+        <div class="row" id="audio-quality">
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Audio Quality (Section 5.1 in the paper)</b></h4>
+                </div>
+            </div>
+            <div class="col-2">
+                &nbsp;
+            </div>
+            <div class="col-8">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" width="33%"></th>
+                            <th scope="col" width="33%">Water</th>
+                            <th scope="col" width="33%">Wind</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">
+                                Training Data Samples
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/water-training-data.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/wind-training-data.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">
+                                Original One-Hot [15, 17]
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/original_onehot_water.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/original_onehot_wind.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">
+                                One-Hot GAN
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/onehot_water.mp3" type="audio/wav" />
+                                </audio>
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/original_onehot_wind.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">
+                                Floating Point GAN
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/floatingpoint_water.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/floatingpoint_wind.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">
+                                Morph GAN
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/morphgan_water.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                            <td scope="row">
+                                <audio controls controlsList="nodownload noplaybackrate" preload="auto">
+                                    <source src="resources/audio-quality/morphgan_wind.wav" type="audio/wav" />
+                                </audio>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-2">
+                &nbsp;
             </div>
         </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 1 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/0.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/1.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/2.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/3.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/4.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/5.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/6.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/7.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/8.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/9.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/9/10.png' /><br /> <audio controls>
-                    <source src='resources/mix/9/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 2 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/0.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/1.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/2.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/3.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/4.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/5.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/6.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/7.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/8.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/9.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/0/10.png' /><br /> <audio controls>
-                    <source src='resources/mix/0/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 3 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/0.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/1.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/2.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/3.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/4.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/5.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/6.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/7.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/8.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/9.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix/7/10.png' /><br /> <audio controls>
-                    <source src='resources/mix/7/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <!--Mix complete-->
-        <hl />
-        <!--Morph2-->
+
+
+
+        <!--Section separator-->
         <div class='row text-wrap'>&nbsp;</div>
-        <div class='row text-wrap'>
-            <div class='col-12 text-center'>
-                <h4><b>Inter-Class Morphing Samples - Morph2</b></h4>
+        <div class='row text-wrap'>&nbsp;</div>
+        <div class='row'>
+            <div class='col-1'>
+                &nbsp;
+            </div>
+            <div class='col-10 table-center-align dashed-boder'>
+                <a href="javascript:scrollToTheTop()">Back to top</a>
+            </div>
+            <div class='col-1'>
+                &nbsp;
             </div>
         </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 1 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/0.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/1.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/2.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/3.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/4.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/5.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/6.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/7.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/8.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/9.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/9/10.png' /><br /> <audio controls>
-                    <source src='resources/morph2/9/10.wav' type='audio/wav' />
-                </audio> </div>
+        <div class='row text-wrap'>&nbsp;</div>
+        <div class='row text-wrap'>&nbsp;</div>
+        <!--Section separator-->
+
+
+
+
+
+
+
+
+
+
+
+        <div class='row text-wrap' id="inter-class-morphing">
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Inter-Class Morphing (Section 5.2 in the paper)</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-2 text-wrap'> </div>
+                <div class='col-8 text-wrap'>Inter-class Morphing involves interpolating between two points in the class
+                    conditioning dimension of the algorithms. The samples below show inter-class morphs
+                    generated between the classes of Wind and Water using MorphGAN, One-Hot GAN and Morph2. Additionally
+                    we show some samples generated from simple waveform mixing
+                    to generate such morphs for comparison. <br /><br />
+
+                    In the samples below, the interpolation starts at the Water class (&alpha;=0.0) and ends at Wind
+                    (&alpha;=1.0)
+                </div>
+                <div class='col-2 text-wrap'> </div>
+
+            </div>
+            <div class='row text-wrap'>&nbsp;</div>
+            <!--Morphgan-->
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Morph GAN</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center'> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.0</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.1</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.2</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.3</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.4</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.5</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.6</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.7</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.8</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.9</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=1.0</div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 1 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/0.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/1.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/2.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/3.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/4.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/5.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/6.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/7.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/8.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/9.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-51/10.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-51/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 2 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/0.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/1.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/2.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/3.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/4.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/5.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/6.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/7.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/8.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/9.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-56/10.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-56/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 3 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/0.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/1.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/2.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/3.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/4.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/5.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/6.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/7.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/8.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/9.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan/2022-10-17-22-50/10.png' /><br /> <audio controls>
+                        <source src='resources/morphgan/2022-10-17-22-50/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <!--Morphgan complete-->
+            <hl />
+            <!--One Hot-->
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>One Hot GAN</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center'> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.0</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.1</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.2</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.3</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.4</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.5</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.6</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.7</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.8</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.9</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=1.0</div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 1 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/0.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/1.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/2.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/3.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/4.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/5.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/6.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/7.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/8.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/9.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-15/10.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-15/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 2 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/0.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/1.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/2.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/3.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/4.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/5.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/6.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/7.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/8.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/9.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-13/10.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-13/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 3 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/0.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/1.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/2.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/3.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/4.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/5.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/6.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/7.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/8.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/9.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot/2022-09-02-15-14/10.png' /><br /> <audio controls>
+                        <source src='resources/onehot/2022-09-02-15-14/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <!--One Hot complete-->
+            <hl />
+            <!--Morph2-->
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Morph2</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center'> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.0</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.1</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.2</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.3</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.4</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.5</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.6</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.7</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.8</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.9</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=1.0</div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 1 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/0.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/1.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/2.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/3.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/4.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/5.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/6.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/7.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/8.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/9.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/9/10.png' /><br /> <audio controls>
+                        <source src='resources/morph2/9/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 2 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/0.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/1.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/2.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/3.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/4.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/5.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/6.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/7.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/8.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/9.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/0/10.png' /><br /> <audio controls>
+                        <source src='resources/morph2/0/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 3 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/0.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/1.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/2.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/3.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/4.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/5.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/6.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/7.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/8.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/9.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2/7/10.png' /><br /> <audio controls>
+                        <source src='resources/morph2/7/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <!--Morph2 complete-->
+            <hl />
+            <!--Mix-->
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Mix</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center'> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.0</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.1</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.2</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.3</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.4</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.5</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.6</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.7</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.8</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=0.9</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>&alpha;=1.0</div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 1 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/0.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/1.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/2.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/3.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/4.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/5.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/6.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/7.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/8.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/9.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/9/10.png' /><br /> <audio controls>
+                        <source src='resources/mix/9/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 2 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/0.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/1.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/2.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/3.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/4.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/5.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/6.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/7.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/8.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/9.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/0/10.png' /><br /> <audio controls>
+                        <source src='resources/mix/0/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 3 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/0.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/1.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/2.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/3.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/4.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/5.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/6.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/7.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/8.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/9.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix/7/10.png' /><br /> <audio controls>
+                        <source src='resources/mix/7/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+
+            <!--Mix complete-->
         </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 2 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/0.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/1.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/2.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/3.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/4.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/5.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/6.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/7.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/8.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/9.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/0/10.png' /><br /> <audio controls>
-                    <source src='resources/morph2/0/10.wav' type='audio/wav' />
-                </audio> </div>
+
+
+
+        <!--Section separator-->
+        <div class='row text-wrap'>&nbsp;</div>
+        <div class='row text-wrap'>&nbsp;</div>
+        <div class='row'>
+            <div class='col-1'>
+                &nbsp;
+            </div>
+            <div class='col-10 table-center-align dashed-boder'>
+                <a href="javascript:scrollToTheTop()">Back to top</a>
+            </div>
+            <div class='col-1'>
+                &nbsp;
+            </div>
         </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 3 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/0.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/1.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/2.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/3.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/4.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/5.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/6.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/7.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/8.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/9.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2/7/10.png' /><br /> <audio controls>
-                    <source src='resources/morph2/7/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <!--Morph2 complete-->
-        <div class='row text-wrap'>
-            <div class='col-12 bg-dark'>&nbsp;</div>
-        </div>
-        <div class='row text-wrap'>
-            <div class='col-12 bg-dark'>&nbsp;</div>
-        </div>
-        <div class='row text-wrap'>
-            <div class='col-12 bg-dark'>&nbsp;</div>
-        </div>
-        <div class='row text-wrap'>
-            <div class='col-12 bg-dark'>&nbsp;</div>
-        </div>
-        <div class='row text-wrap'>
-            <div class='col-12 bg-dark'>&nbsp;</div>
-        </div>
-        <div class='row text-wrap'>
-            <div class='col-12 bg-dark'>&nbsp;</div>
-        </div>
-        <div class='row text-wrap'>
-            <div class='col-12 bg-dark'>&nbsp;</div>
-        </div>
-        <div class='row text-wrap'>
-            <div class='col-12 bg-dark'>&nbsp;</div>
-        </div>
+        <div class='row text-wrap'>&nbsp;</div>
+        <div class='row text-wrap'>&nbsp;</div>
+        <!--Section separator-->
+
+
+
         <!---Intra-Class begins--->
-        <!--Morphgan-->
         <div class='row text-wrap'>&nbsp;</div>
-        <div class='row text-wrap'>
-            <div class='col-12 text-center'>
-                <h4><b>Intra-Class Morphing Samples - Morph GAN</b></h4>
+
+
+
+        <div class='row text-wrap' id="intra-class-morphing">
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Intra-Class Morphing (Section 5.3 in the paper)</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-2 text-wrap'> </div>
+                <div class='col-8 text-wrap'>Intra-class Morphing involves interpolating between two points in the
+                    control parameters conditions
+                    of the algorithms. The samples below show intra-class morphs
+                    generated by interpolating between the lowest and the highest wind-strengths and fill-levels for
+                    Wind and Water respectively using MorphGAN, One-Hot GAN and Morph2. Additionally
+                    we show some samples generated from simple waveform mixing
+                    to generate such morphs for comparison.<br /><br />
+
+                    In the samples below, the interpolation starts at the fill-level or wind-strength 0.0 (lowest) and
+                    ends at 1.0 (highest).
+                </div>
+                <div class='col-2 text-wrap'> </div>
+
+            </div>
+            <div class='row text-wrap'>&nbsp;</div>
+
+            <!--Morphgan-->
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Morph GAN</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center'> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.0</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.1</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.2</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.3</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.4</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.5</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.6</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.7</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.8</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.9</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=1.0</div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 2 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/0.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/1.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/2.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/3.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/4.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/5.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/6.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/7.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/8.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/9.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-38/10.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-38/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 1 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/0.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/1.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/2.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/3.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/4.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/5.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/6.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/7.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/8.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/9.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morphgan-semantic/2022-08-24-21-44/10.png' /><br /> <audio controls>
+                        <source src='resources/morphgan-semantic/2022-08-24-21-44/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <!--Morphgan complete-->
+            <hl />
+            <!--One Hot gan-->
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>One Hot GAN</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center'> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.0</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.1</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.2</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.3</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.4</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.5</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.6</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.7</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.8</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.9</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=1.0</div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 1 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/0.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/1.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/2.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/3.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/4.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/5.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/6.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/7.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/8.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/9.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-31/10.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-31/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 2 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/0.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/1.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/2.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/3.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/4.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/5.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/6.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/7.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/8.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/9.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/onehot-semantic/2022-08-24-22-26/10.png' /><br /> <audio controls>
+                        <source src='resources/onehot-semantic/2022-08-24-22-26/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <!--One Hot gan complete-->
+            <hl />
+            <!--Morph2-->
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Morph2</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center'> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.0</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.1</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.2</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.3</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.4</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.5</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.6</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.7</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.8</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.9</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=1.0</div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 1 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/0.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/1.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/2.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/3.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/4.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/5.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/6.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/7.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/8.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/9.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/0/10.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/0/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 2 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/0.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/1.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/2.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/3.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/4.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/5.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/6.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/7.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/8.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/9.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/morph2-semantic/6/10.png' /><br /> <audio controls>
+                        <source src='resources/morph2-semantic/6/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <!--Morph2 complete-->
+            <hl />
+            <!--Mix-->
+            <div class='row text-wrap'>&nbsp;</div>
+            <div class='row text-wrap'>
+                <div class='col-12 text-center'>
+                    <h4><b>Mix</b></h4>
+                </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center'> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.0</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.1</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.2</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.3</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.4</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.5</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.6</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.7</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.8</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=0.9</div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'>fill-level/strength=1.0</div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 1 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/0.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/1.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/2.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/3.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/4.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/5.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/6.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/7.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/8.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/9.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/0/10.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/0/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <div class='row text-wrap text-center'>
+                <div class='col-1 border text-wrap text-center fw-bold'> Sample 2 </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/0.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/0.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/1.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/1.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/2.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/2.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/3.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/3.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/4.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/4.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/5.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/5.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/6.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/6.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/7.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/7.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/8.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/8.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/9.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/9.wav' type='audio/wav' />
+                    </audio> </div>
+                <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
+                        src='resources/mix-semantic/6/10.png' /><br /> <audio controls>
+                        <source src='resources/mix-semantic/6/10.wav' type='audio/wav' />
+                    </audio> </div>
+            </div>
+            <!--Mix complete-->
+
+        </div>
+
+
+        <!--Section separator-->
+        <div class='row text-wrap'>&nbsp;</div>
+        <div class='row text-wrap'>&nbsp;</div>
+        <div class='row'>
+            <div class='col-1'>
+                &nbsp;
+            </div>
+            <div class='col-10 table-center-align dashed-boder'>
+                <a href="javascript:scrollToTheTop()">Back to top</a>
+            </div>
+            <div class='col-1'>
+                &nbsp;
             </div>
         </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 1 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/0.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/1.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/2.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/3.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/4.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/5.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/6.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/7.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/8.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/9.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-44/10.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-44/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 2 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/0.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/1.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/2.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/3.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/4.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/5.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/6.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/7.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/8.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/9.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morphgan-semantic/2022-08-24-21-38/10.png' /><br /> <audio controls>
-                    <source src='resources/morphgan-semantic/2022-08-24-21-38/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <!--Morphgan complete-->
-        <hl />
-        <!--One Hot gan-->
         <div class='row text-wrap'>&nbsp;</div>
-        <div class='row text-wrap'>
-            <div class='col-12 text-center'>
-                <h4><b>Intra-Class Morphing Samples - One Hot GAN</b></h4>
-            </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 1 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/0.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/1.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/2.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/3.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/4.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/5.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/6.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/7.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/8.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/9.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-31/10.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-31/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 2 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/0.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/1.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/2.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/3.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/4.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/5.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/6.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/7.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/8.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/9.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/onehot-semantic/2022-08-24-22-26/10.png' /><br /> <audio controls>
-                    <source src='resources/onehot-semantic/2022-08-24-22-26/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <!--One Hot gan complete-->
-        <hl />
-        <!--Mix-->
         <div class='row text-wrap'>&nbsp;</div>
-        <div class='row text-wrap'>
-            <div class='col-12 text-center'>
-                <h4><b>Intra-Class Morphing Samples - Mix</b></h4>
-            </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 1 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/0.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/1.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/2.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/3.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/4.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/5.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/6.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/7.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/8.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/9.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/0/10.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/0/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 2 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/0.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/1.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/2.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/3.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/4.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/5.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/6.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/7.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/8.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/9.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/mix-semantic/6/10.png' /><br /> <audio controls>
-                    <source src='resources/mix-semantic/6/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <!--Mix complete-->
-        <hl />
-        <!--Morph2-->
-        <div class='row text-wrap'>&nbsp;</div>
-        <div class='row text-wrap'>
-            <div class='col-12 text-center'>
-                <h4><b>Intra-Class Morphing Samples - Morph2</b></h4>
-            </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 1 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/0.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/1.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/2.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/3.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/4.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/5.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/6.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/7.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/8.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/9.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/0/10.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/0/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <div class='row text-wrap text-center'>
-            <div class='col-1 border text-wrap text-center'> Sample 2 </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/0.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/0.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/1.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/1.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/2.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/2.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/3.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/3.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/4.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/4.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/5.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/5.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/6.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/6.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/7.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/7.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/8.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/8.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/9.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/9.wav' type='audio/wav' />
-                </audio> </div>
-            <div class='col-1 border text-wrap text-center p-0 m-0'> <img width='100%'
-                    src='resources/morph2-semantic/6/10.png' /><br /> <audio controls>
-                    <source src='resources/morph2-semantic/6/10.wav' type='audio/wav' />
-                </audio> </div>
-        </div>
-        <!--Morph2 complete-->
+        <!--Section separator-->
+
+
+
+
+
     </div>
 </body>
 
