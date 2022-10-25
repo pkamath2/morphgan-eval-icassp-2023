@@ -1,11 +1,11 @@
 #!/bin/sh
 
-echo '############################MORPH#############################'
+echo '############################MORPHGAN#############################'
 
-water_dir='/Users/purnimakamath/appdir/Github/ieee-tx-on-mm/fad_data_folder/water-wind/training-data/stats/water/water'
-wind_dir='/Users/purnimakamath/appdir/Github/ieee-tx-on-mm/fad_data_folder/water-wind/training-data/stats/wind/wind'
+water_dir=$PWD'/fad_data_folder/water-wind/training-data/stats/water/stats'
+wind_dir=$PWD'/fad_data_folder/water-wind/training-data/stats/wind/stats'
 
-morphgan_audio='/Users/purnimakamath/appdir/Github/ieee-tx-on-mm/data/water-wind/morphgan/audio/middle_100x11files'
+morphgan_audio='../../data/water-wind/morphgan/audio/middle_100x11files'
 
 
 # FAD Data Folders
@@ -28,21 +28,20 @@ find . -type f -name '*.wav' -print0 | while IFS= read -r -d '' file; do
     full_file_name=${full_file_name/:/_}
     full_file_name=${full_file_name//\//_}
 
-    echo cp "$file" $morphgan_fadaudiofiles/$full_file_name
     cp "$file" $morphgan_fadaudiofiles/$full_file_name
 done
 
 
-cd '/Users/purnimakamath/appdir/Github/frechet_audio_distance/'
+cd $FAD_LOC
 ls --color=never $morphgan_fadaudiofiles/* > $morphgan_fadfilelist/filelist.cvs
 
 python -m create_embeddings_main --input_files $morphgan_fadfilelist/filelist.cvs --stats $morphgan_stats/0_5stats
 
-echo 'FAD Distance from water ==== '
+echo 'FAD Distance 0.5 distribution from water ==== '
 python -m compute_fad --background_stats $water_dir --test_stats $morphgan_stats/*
 
 
-echo 'FAD Distance from wind ==== '
+echo 'FAD Distance 0.5 distribution from wind ==== '
 python -m compute_fad --background_stats $morphgan_stats/0_5stats --test_stats $wind_dir
 
 echo '#################################################################'

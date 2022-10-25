@@ -1,7 +1,7 @@
 #!/bin/sh
 echo '############################ONEHOT#############################'
 
-onehot_audio='/Users/purnimakamath/appdir/Github/ieee-tx-on-mm/data/water-wind/onehot/audio/morph'
+onehot_audio='../../data/water-wind/onehot/audio/morph'
 
 # FAD Data Folders
 onehot_fadaudiofiles=$PWD'/fad_data_folder/water-wind/onehot/audio/morph'
@@ -35,7 +35,7 @@ do
     done
 done
 
-cd '/Users/purnimakamath/appdir/Github/frechet_audio_distance/'
+cd $FAD_LOC
 
 for i in {0..10}
 do
